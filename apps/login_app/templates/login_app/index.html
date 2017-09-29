@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <title>Login and Registration</title>
+
+    <script src= 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    
+    <style>
+        body {
+            font-family: Tahoma, Arial, Helvetica, sans-serif;
+            color:darkslateblue;
+            background: #EBEEF3;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        input, select, textarea {
+            margin: 10px;
+            border-radius: 3px;
+            border: 1px solid #A099D3;
+        }
+        label {
+            width: 150px;
+            text-align: right;
+            vertical-align: middle;
+        }
+        .radio_stack {
+            display: block;
+        }
+        .radio_title {
+            margin-bottom: 0;
+            height: 37px;
+            margin-top: 10px;
+        }
+        textarea {
+           vertical-align: top;
+        }
+        .margin_t {
+            margin-top: 20px;
+        }
+        .msgs {
+            color: red;
+            margin-top: 80px;
+        }
+        input[type="submit"] {
+           background-color: #5883A7;
+           width: 191px;
+           height: 31px;
+           border-radius: 3px;
+           margin-top: 25px; 
+           color: white;
+           font-weight: 500;
+           
+             
+        }
+        .pw_msg {
+            margin-left: 60px;    
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-12"><h1>Welcome!</h1></div>
+    </div>
+    <div class="row">
+        <div class="col-6">                                                                                       
+            <h3 class="margin_t">Open an account:</h3>
+            <div>
+                <form id="form_1" action="/register" method="post">
+                    {% csrf_token %}
+
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name" value="" tabindex="1">
+                </div>
+                <div>
+                    <label for="alias">Alias:</label>
+                    <input type="text" name="alias" id="alias" value="" tabindex="2">
+                </div>
+                <div>
+                    <label for="email">email:</label>
+                    <input type="text" name="email" id="email" value="" tabindex="3">
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="text" name="password" id="password" value="" tabindex="4">
+                    <p class="pw_msg">Password must be at least 8 characters.</p>
+                </div>
+                <div>
+                    <label for="c_password">Confirm password:</label>
+                    <input type="text" name="c_password" id="c_password" value="" tabindex="5">
+                </div>
+                
+                <div>
+                    <label for="b_day">Birthday:</label>
+                    <input type="date" name="b_day" id="b_day" value="" tabindex="5">
+                </div>
+
+                 <div>
+                    <label for="nothing"><br/></label>
+                    <input type="submit" value="Register">
+                </div>
+            </form>
+            </div>
+        </div><!-- end col-6 -->
+        <div class="col-6">
+            <div class="margin_t">
+                    <h3>Sign in:</h3>
+            <form id="form_2" action="/login" method="post">
+                {% csrf_token %}
+
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" id="email" value="" tabindex="6">
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="text" name="password" id="password" value="" tabindex="7">
+                </div>             
+
+                <div>
+                    <label for="nothing"><br/></label>            
+                    <input type="submit" value="Sign In">
+                </div>
+            </form>
+            </div>
+            <div class="msgs">
+
+                    {% if messages %}
+                    {% for message in messages %}
+                        <h6>{{message}}</h6>
+                    {% endfor %}
+                    {% endif %}
+            </div>
+
+        </div><!-- end col-6 -->
+    </div><!-- end row -->
+</div><!-- end container -->
+</body>
+</html>

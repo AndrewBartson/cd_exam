@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <title>Poke - World Headquarters - Bellevue WA</title>
+    <script src= 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>   
+    <style>
+        body {
+            font-family: Tahoma, Arial, Helvetica, sans-serif;
+            color:darkslateblue;
+            background: #EBEEF3;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        input, select, textarea {
+            margin: 10px;
+            border-radius: 3px;
+            border: 1px solid #A099D3;
+        }
+        label {
+            width: 150px;
+            text-align: right;
+            vertical-align: middle;
+        }
+        textarea {
+           vertical-align: top;
+        }
+        .margin_t {
+            margin-top: 20px;
+        }
+        .msgs {
+            color: red;
+            margin-top: 30px;
+        }
+        input[type="submit"] {
+           background-color: #5883A7;
+           width: 191px;
+           height: 31px;
+           border-radius: 3px;
+           margin-top: 25px; 
+           color: white;
+           font-weight: 500;     
+        }
+        .pw_msg {
+            margin-left: 60px;    
+        }
+        .banner {
+            height: 40px;
+            text-align: right;
+        }
+        nav ul {
+            height: 300px; 
+            width: 400px;
+            }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">    
+        <div class="col-12 banner">
+         <h5 class="margin_t"><a href="/logout">Sign out</a></h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h3>Welcome, {{request.session.alias}}</h3>
+            <h5 class="margin_t">You received a total of {{cur_user.r_count}} pokes!</h5>
+            <h5 class="margin_t">You gave a total of {{cur_user.g_count}} pokes!</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table">                    
+                {% for i in winner_set %}
+                <tr><h5>[[i.alias]] poked you [[i.count]] times.</h5></tr>
+                {% endfor %}
+            </table>   
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+                <h5 class="margin_t">People you may want to poke:</h5>
+                <div class="msgs">
+                <table class="table">
+                    <tr><th>Name</th><th>Alias</th><th>Email</th><th>Poke History</th><th>Action</th></tr>
+                    {% for user in pokers %}
+                    <tr><td>{{user.name}}</td>
+                        <td>{{user.alias}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.count}}</td>
+                        <td><button><a href="/poke/add/{{user.id}}">Poke this person</a></button></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>  
+</div><!-- end container -->
+</body>
+</html>
